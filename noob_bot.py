@@ -3,6 +3,7 @@ from discord.ext.commands import Bot
 from discord.ext import commands
 import asyncio
 import time
+import config
 
 Client = discord.Client()
 client = commands.Bot(command_prefix = " ")
@@ -22,4 +23,4 @@ async def on_message(message):
         # Output a formatted sentence
         await client.send_message(message.channel, "%s" % (" ".join(args[1:])))
 
-client.run("NDk5MjkxMjY1MTgwMTA2NzUy.Dp6JQQ.AYDXUFkhX0Gej0RwxD-YqF2p1JQ")
+client.run(config.TOKEN)
