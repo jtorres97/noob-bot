@@ -9,6 +9,5 @@ My first time ever dabbling into bots, decided to go with making one for Discord
 Install the dependencies
 
 ```sh
-py -3 -m pip install discord
-py -3 -m pip install asyncio
+pip install -U git+https://github.com/Rapptz/discord.py@rewrite#egg=discord.py[voice]
 ```
