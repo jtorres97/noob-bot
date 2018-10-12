@@ -5,9 +5,13 @@ import asyncio
 import time
 import config
 
-Client = discord.Client()
-client = commands.Bot(command_prefix = " ")
+# Configuration file(s)
+import configparser
 
+# Load configuration to get around hard coded tokens
+config = configparser.ConfigParser()
+with open('config.ini') as config_file:
+    config.read_file(config_file)
 @client.event
 async def on_ready():
     print("Bot is ready!")
