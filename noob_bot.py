@@ -20,13 +20,14 @@ startup_extensions = ['cogs.basic']
 @client.event
 async def on_ready():
     # Print some stuff when the bot goes online
+    print('------------------------------------')
     print('Logged in as')
     print(client.user.name)
     print(client.user.id)
     print('Discord.py Version: ' + str(discord.__version__))
-    print('------')
+    print('------------------------------------')
 
-# Removes X amout of messages from a discord channel
+# Removes X amount of messages from a discord channel
 # .clear
 @client.command()
 async def clear(ctx, amount: int):
