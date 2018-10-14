@@ -13,6 +13,7 @@ with open('config.ini') as config_file:
 
 # Set up command prefix and bot description
 client = commands.Bot(command_prefix = '.', description = 'Josh\'s first bot.')
+client.remove_command('help')
 
 # Extentions added by default
 startup_extensions = ['cogs.basic']

@@ -39,6 +39,24 @@ class BasicCog:
                 result = member.avatar_url
         await ctx.send(f'{searchUser}\'s avatar is: {result}')
 
+    # Lists all the commands that can be executed 
+    # .help
+    @commands.command(name='help')
+    async def help(self, ctx):
+        author = ctx.message.author
+
+        embed = discord.Embed(
+            colour = discord.Colour.orange()
+        )
+
+        embed.set_author(name='Commands')
+        embed.add_field(name='.ping', value='Returns Pong!', inline=False)
+        embed.add_field(name='.coolbot', value='Is the bot cool?', inline=False)
+        embed.add_field(name='.getAvatar @user', value='Returns a users avatar.', inline=False)
+        embed.add_field(name='.roll', value='roll two dices, values will be 2-12.', inline=False)
+
+        await author.send('My Commands. :)', embed=embed)
+
 # End of class BasicCog
 
 # Add this cog to the bot
