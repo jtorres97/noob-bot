@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 
 import traceback
+import random
 
 class BasicCog:
     def __init__(self, bot):
@@ -29,7 +30,7 @@ class BasicCog:
         await ctx.send('This bot is cool. :)')
 
     # Gets the avatar of a selected user
-    # .getAvatar .getAvatar @user
+    # .getAvatar @user
     @commands.cooldown(1, 1, commands.BucketType.user)
     @commands.command(name='getAvatar')
     async def getAvatar(self, ctx, searchUser):
@@ -39,6 +40,27 @@ class BasicCog:
                 result = member.avatar_url
         await ctx.send(f'{searchUser}\'s avatar is: {result}')
 
+    # roll command
+    # roll two dices, values will be 2-12
+    # replies with a randomly generated value between 2-12
+    # .roll
+    @commands.command(name='roll')
+    async def roll(self, ctx):
+        roll = random.randint(2, 12)
+        if len(str(roll)) == 1:
+            rollMessage = str(roll)
+            rollMessage += "\u20e3"
+            await ctx.message.add_reaction(rollMessage)
+        else:
+            rollMessage = str(roll)[:1]
+            rollMessage += "\u20e3"
+            await ctx.message.add_reaction(rollMessage)
+            rollMessage = str(roll % 10)
+            rollMessage += "\u20e3"
+            await ctx.message.add_reaction(rollMessage)
+
+        await ctx.send(roll)
+    
     # Lists all the commands that can be executed 
     # .help
     @commands.command(name='help')
