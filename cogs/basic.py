@@ -8,6 +8,20 @@ class BasicCog:
     def __init__(self, bot):
         self.bot = bot
 
+    # Reloads an extension in the bot
+    # .reload 
+    @commands.command()
+    @commands.is_owner()
+    async def reload(self, ctx, name: str):
+        m = await ctx.send(f'Loading {name}')
+        try:
+            self.bot.unload_extension(f'cogs.{name}')
+            self.bot.load_extension(f'cogs.{name}')
+            await m.edit(content='Extension reloaded.')
+        except (ImportError, SyntaxError, discord.ClientException) as e:
+            stack_line = str(e).split('\n')[-1]
+            await m.edit(content=f'Error while loading {name}\n`{stack_line}`')
+
     # Simple ping command
     # Replies back to the command context with the text "Pong!"
     # .ping
