@@ -75,9 +75,48 @@ class BasicCog:
         embed.add_field(name='.ping', value='Returns Pong!', inline=False)
         embed.add_field(name='.coolbot', value='Is the bot cool?', inline=False)
         embed.add_field(name='.getAvatar @user', value='Returns a users avatar.', inline=False)
-        embed.add_field(name='.roll', value='roll two dices, values will be 2-12.', inline=False)
+        embed.add_field(name='.roll', value='Roll two dices, values will be 2-12.', inline=False)
+        embed.add_field(name='.info @user', value='Gives information about a user.', inline=False)
+        embed.add_field(name='.rps', value='Play a game of Rock, Paper, Scissors with the bot.', inline=False)
 
         await author.send('My Commands. :)', embed=embed)
+
+    # Gives User Information
+    # .info @user
+    @commands.command()
+    async def info(self,ctx, user: discord.Member):
+        embed = discord.Embed(title='User Info', image=user.avatar, colour=user.colour)
+        embed.set_thumbnail(url=user.avatar_url)
+        embed.add_field(name="Username: ", value=user.name, inline=True)
+        embed.add_field(name="Join Date: ", value=user.joined_at,inline=True)
+        embed.add_field(name="Display name: ", value=user.display_name,inline=True)
+        embed.add_field(name="Account Created at: ",value=user.created_at,inline=True)
+        await ctx.send(embed=embed)
+
+    # Play a game of Rock, Paper, Scissors with the bot.
+    # .rps
+    @commands.command()
+    async def rps(self, ctx, userChoice : str):
+        vals = ["rock", "paper", "scissors"]
+        userChoice = str.lower(userChoice)
+        if userChoice not in vals:
+            await ctx.send(ctx.author.mention + " Invalid input. Please enter \"rock\", \"paper\", or \"scissors\"")
+        else:
+            botChoice = vals[random.randint(0, 2)]
+            if(userChoice == "rock" and botChoice == "paper"):
+                await ctx.send(f"I choose {botChoice}! {ctx.author.mention}... You lose! " + u"\U0001F602")
+            elif(userChoice == "rock" and botChoice == "scissors"):
+                await ctx.send(f"I choose {botChoice}! {ctx.author.mention}... You win! " + u"\U0001F614")
+            elif(userChoice == "paper" and botChoice == "rock"):
+                await ctx.send(f"I choose {botChoice}! {ctx.author.mention}... You win! " + u"\U0001F614")  
+            elif(userChoice == "paper" and botChoice == "scissors"):
+                await ctx.send(f"I choose {botChoice}! {ctx.author.mention}... You lose! " + u"\U0001F602")  
+            elif(userChoice == "scissors" and botChoice == "rock"):
+                await ctx.send(f"I choose {botChoice}! {ctx.author.mention}... You lose! " + u"\U0001F602")
+            elif(userChoice == "scissors" and botChoice == "paper"):
+                await ctx.send(f"I choose {botChoice}! {ctx.author.mention}... You win! " + u"\U0001F614")
+            else:
+                await ctx.send(ctx.author.mention + " It's a tie " + "\uD83D\uDD2B")
 
 # End of class BasicCog
 
