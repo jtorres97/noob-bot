@@ -18,7 +18,7 @@ client.remove_command('help')
 client.launch_time = datetime.utcnow()
 
 # Extentions added by default
-startup_extensions = ['cogs.basic']
+startup_extensions = ['cogs.basic', 'cogs.fun', 'cogs.util']
 
 @client.event
 async def on_ready():
